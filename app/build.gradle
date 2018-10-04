@@ -38,4 +38,12 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.4.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
+    // https://mvnrepository.com/artifact/com.jcraft/jsch
+    compile group: 'com.jcraft', name: 'jsch', version: '0.1.54'
+
+
+
 }

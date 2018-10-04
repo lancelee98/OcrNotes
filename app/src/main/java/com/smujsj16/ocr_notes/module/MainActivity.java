@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private ImageView imageView;
     private TextView textView;
     private Button button;
+    private  Button button_test;
 
     private MainPresenter mPresenter;
     File mTmpFile;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         imageView = findViewById(R.id.imageView);
         textView = findViewById(R.id.textView);
         button = findViewById(R.id.button);
+        button_test=findViewById(R.id.button_test);
         mPresenter = new MainPresenter(this);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +74,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 /*Resources r = mContext.getResources();
                 Bitmap bmp = BitmapFactory.decodeResource(r, R.drawable.test);
                 mPresenter.getRecognitionResultByImage(bmp);*/
+            }
+        });
+        button_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, TEST.class);
+                startActivity(intent);
             }
         });
 
