@@ -72,7 +72,7 @@ public class DBService {
 
     public int createNewUser(String phone_num, String password){
         int result=-1;
-        if(true){
+        if(!CheckUtils.isMobile(phone_num)&&CheckUtils.isPassword(password)){
             //获取链接数据库对象
             Log.d("db","李闯1");
             conn= MysqlUtils.getConn();
