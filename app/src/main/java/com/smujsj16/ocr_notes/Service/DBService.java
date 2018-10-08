@@ -1,6 +1,7 @@
 package com.smujsj16.ocr_notes.Service;
 
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 
@@ -12,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBService {
 
@@ -47,7 +50,7 @@ public class DBService {
         //获取链接数据库对象
         conn= MysqlUtils.getConn();
         //MySQL 语句
-        String sql="select password from user where phone_num=?";
+        String sql="select * from user where phone_num=?";
         try {
             boolean closed=conn.isClosed();
             if(conn!=null&&(!conn.isClosed())) {
@@ -55,9 +58,9 @@ public class DBService {
                 ps.setString(1, phone_num);//第一个参数state 一定要和上面SQL语句字段顺序一致
                 if (ps != null) {
                     rs = ps.executeQuery();
-                    if (rs != null) {
-                        if(password==rs.getString("password"))
-                            result=1;
+                    while(rs.next()){
+                        if(rs.getString(1).equals(password))
+                        result=1;
                     }
                 }
             }
@@ -72,9 +75,38 @@ public class DBService {
      * 检验密码
      * */
 
-    public int createNewUser(String phone_num, String password){
+    public int getUserId(User user)
+    {
+        String sql="SELECT * FROM user WHERE phone_num=? ";
         int result=-1;
-        if(!CheckUtils.isMobile(phone_num)&&CheckUtils.isPassword(password)){
+        String phone_num=user.getPhone_number();
+        conn= MysqlUtils.getConn();
+        try {
+            if(conn!=null&&(!conn.isClosed())){
+                ps= (PreparedStatement) conn.prepareStatement(sql);
+                ps.setString(1,phone_num);//第一个参数
+                if(ps!=null){
+                    rs= ps.executeQuery();
+                    if(rs!=null){
+                        while(rs.next()){
+                            user.setUser_id(rs.getString(3));
+                            result=1;
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        MysqlUtils.closeAll(conn,ps,rs);//关闭相关操作
+        return result;
+    }
+
+    public int createNewUser(User user){
+        int result=-1;
+        String phone_num=user.getPhone_number();
+        String password=user.getPassword();
+        if(true){//!CheckUtils.isMobile(phone_num)&&CheckUtils.isPassword(password)  以后添加条件
             //获取链接数据库对象
             conn= MysqlUtils.getConn();
             //MySQL 语句
@@ -94,6 +126,40 @@ public class DBService {
         MysqlUtils.closeAll(conn,ps);//关闭相关操作
         return result;
     }
+
+
+
+        /*public List<User> selectNotes(String condition){
+        //结果存放集合
+        List<User> list=new ArrayList<User>();
+        //MySQL 语句
+        //String sql="select "/condition" from user";
+        //获取链接数据库对象
+        conn= MysqlUtils.getConn();
+        try {
+            if(conn!=null&&(!conn.isClosed())){
+                ps= (PreparedStatement) conn.prepareStatement(sql);
+                if(ps!=null){
+                    rs= ps.executeQuery();
+                    if(rs!=null){
+                        while(rs.next()){
+                            User u=new User();
+                            u.setId(rs.getString("id"));
+                            u.setName(rs.getString("name"));
+                            u.setPhone(rs.getString("phone"));
+                            u.setContent(rs.getString("content"));
+                            u.setState(rs.getString("state"));
+                            list.add(u);
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        MysqlUtils.closeAll(conn,ps,rs);//关闭相关操作
+        return list;
+    }*/
 
 
     /**

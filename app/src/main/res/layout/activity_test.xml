@@ -9,13 +9,12 @@
         android:id="@+id/button_upload"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="上传"
-        />
+        android:text="测试ftp" />
 
     <Button
         android:id="@+id/button_download"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="下载" />
+        android:text="测试数据库" />
 
 </LinearLayout>

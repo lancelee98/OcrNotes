@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.smujsj16.ocr_notes.Entity.User;
 import com.smujsj16.ocr_notes.R;
 import com.smujsj16.ocr_notes.Service.DBService;
 import com.smujsj16.ocr_notes.utils.SFTPUtils;
@@ -57,7 +58,10 @@ public class TEST extends Activity implements View.OnClickListener {
 
                     case R.id.button_download: {
 
-                        int i=DBService.getDbService().createNewUser("13561542957","19980624lc");
+                        User user=new User("18916131518","19980624lc");
+                       // int i=DBService.getDbService().getUserId(user);//获得id
+                       // int i=DBService.getDbService().createNewUser(user);//创建用户
+                        int i=DBService.getDbService().checkPassword("18916139519","19980628lc");//检查密码是否正确
                         if(i==-1)
                             Log.d(TAG,"失败");
                         if(i==1)

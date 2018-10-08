@@ -1,18 +1,17 @@
 package com.smujsj16.ocr_notes.Entity;
 
 public class User {
-    private long user_id;
+    private String user_id;
     private String phone_number;
     private String password;
 
-    public User(long user_id, String phone_number, String password)
+    public User(String phone_number, String password)
     {
         this.password=password;
         this.phone_number=phone_number;
-        this.user_id=user_id;
     }
 
-    public long getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
@@ -32,7 +31,7 @@ public class User {
         this.phone_number = phone_number;
     }
 
-    public void setUser_id(long user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 }
