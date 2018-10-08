@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         if (!hasPermission()) {
             return;
         }
-
     }
 
 
