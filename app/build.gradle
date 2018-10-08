@@ -44,5 +44,8 @@ dependencies {
     // https://mvnrepository.com/artifact/com.jcraft/jsch
     compile group: 'com.jcraft', name: 'jsch', version: '0.1.54'
 
+    compile 'com.android.support:design:26.1.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+
 
 }

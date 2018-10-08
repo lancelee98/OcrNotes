@@ -22,14 +22,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
+        android:hint="请输入手机号"
+        android:textColorHint="#969696"
+        android:textColor="#666666"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#666666"
         app:layout_constraintEnd_toEndOf="@+id/passwd_text_l"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/passwd_text_l"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:text="请输入手机号" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/passwd_text_l"
@@ -44,7 +45,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_text_l"
-        tools:text="请输入密码" />
+        android:hint="请输入密码"
+        android:textColorHint="#969696"/>
 
     <EditText
         android:id="@+id/passwd_confirm"
@@ -59,10 +61,11 @@
         app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="@+id/passwd_text_l"
         app:layout_constraintTop_toBottomOf="@+id/passwd_text_l"
-        tools:text="确认密码" />
+        android:hint="确认密码"
+        android:textColorHint="#969696"/>
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/button_confirm"
         android:layout_width="210dp"
         android:layout_height="46dp"
         android:layout_marginTop="24dp"
@@ -77,26 +80,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwd_confirm" />
 
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="23dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="注册"
         android:textColor="#666666"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/back"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/back" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="13dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.166" />
 
 </android.support.constraint.ConstraintLayout>

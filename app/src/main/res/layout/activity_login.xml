@@ -30,7 +30,8 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:text="请输入手机号" />
+        android:hint="请输入手机号"
+        android:textColorHint="#969696"/>
 
     <EditText
         android:id="@+id/passwd_text_l"
@@ -43,14 +44,15 @@
         android:textColor="#666666"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button_login"
+        app:layout_constraintBottom_toTopOf="@+id/button_confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_text_l"
-        tools:text="请输入密码" />
+        android:hint="请输入密码"
+        android:textColorHint="#969696"/>
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/button_confirm"
         android:layout_width="210dp"
         android:layout_height="46dp"
         android:layout_marginBottom="156dp"
@@ -78,7 +80,7 @@
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:clickable="true"
         android:text="注册"
@@ -95,6 +97,6 @@
         android:text="记住我"
         android:textColor="#666666"
         app:layout_constraintStart_toStartOf="@+id/passwd_text_l"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintTop_toBottomOf="@+id/button_confirm" />
 
 </android.support.constraint.ConstraintLayout>

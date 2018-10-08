@@ -4,6 +4,7 @@ package com.smujsj16.ocr_notes.Service;
 import android.util.Log;
 
 
+import com.smujsj16.ocr_notes.Entity.User;
 import com.smujsj16.ocr_notes.utils.CheckUtils;
 import com.smujsj16.ocr_notes.utils.MysqlUtils;
 
@@ -40,29 +41,30 @@ public class DBService {
         return dbService;
     }
 
-    /**
-     * 新建用户
-     * */
 
     public int checkPassword(String phone_num, String password){
         int result=-1;
-        if(!CheckUtils.isMobile(phone_num)&&CheckUtils.isPassword(password)){
-            //获取链接数据库对象
-            conn= MysqlUtils.getConn();
-            //MySQL 语句
-            String sql="select password from user where phone_num=?";
-            try {
-                boolean closed=conn.isClosed();
-                if(conn!=null&&(!closed)){
-                    ps= (PreparedStatement) conn.prepareStatement(sql);
-                    ps.setString(1,phone_num);//第一个参数state 一定要和上面SQL语句字段顺序一致
-                    result=ps.executeUpdate();//返回1 执行成功
+        //获取链接数据库对象
+        conn= MysqlUtils.getConn();
+        //MySQL 语句
+        String sql="select password from user where phone_num=?";
+        try {
+            boolean closed=conn.isClosed();
+            if(conn!=null&&(!conn.isClosed())) {
+                ps = (PreparedStatement) conn.prepareStatement(sql);
+                ps.setString(1, phone_num);//第一个参数state 一定要和上面SQL语句字段顺序一致
+                if (ps != null) {
+                    rs = ps.executeQuery();
+                    if (rs != null) {
+                        if(password==rs.getString("password"))
+                            result=1;
+                    }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        MysqlUtils.closeAll(conn,ps);//关闭相关操作
+        MysqlUtils.closeAll(conn,ps,rs);//关闭相关操作
         return result;
     }
 
@@ -74,15 +76,12 @@ public class DBService {
         int result=-1;
         if(!CheckUtils.isMobile(phone_num)&&CheckUtils.isPassword(password)){
             //获取链接数据库对象
-            Log.d("db","李闯1");
             conn= MysqlUtils.getConn();
             //MySQL 语句
-            Log.d("db","李闯2");
             String sql="INSERT INTO user (phone_num,password) VALUES (?,?)";
             try {
-                if(conn==null)Log.d("db","李闯3");
                 boolean closed=conn.isClosed();
-                if(conn!=null&&(!closed)){
+                if(conn!=null&&(!conn.isClosed())){
                     ps= (PreparedStatement) conn.prepareStatement(sql);
                     ps.setString(1,phone_num);//第一个参数
                     ps.setString(2,password);//第二个参数
