@@ -17,6 +17,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -64,6 +65,8 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId())
         {
             case R.id.menu_button:
+
+                Log.d("test",SignupActivity.userid);//测试是否传过来userid
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
 

@@ -1,15 +1,20 @@
 package com.smujsj16.ocr_notes.module;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Looper;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.smujsj16.ocr_notes.Entity.User;
 import com.smujsj16.ocr_notes.R;
+import com.smujsj16.ocr_notes.Service.DBService;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView signup;
@@ -40,8 +45,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId())
         {
             case  R.id.button_confirm:
-                intent=new Intent(this, IndexActivity.class);
-                startActivity(intent);
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Looper.prepare();
+                        //进行对手机号和密码的判断 传入数据库中进行测试
+                        String inputPhoneNum = phone_num.getText().toString();
+                        String inputPwd = passwd.getText().toString();
+                        int i = DBService.getDbService().checkPassword(inputPhoneNum, inputPwd);//检查手机号密码是否正确
+                        //登录成功 跳转到首页
+                        if (i == 1) {
+                            Log.d("Login", "Success");
+                            User user=new User(inputPhoneNum,inputPwd);
+                            DBService.getDbService().getUserId(user);
+                            SignupActivity.userid=user.getUser_id();//传入登录的userid
+                            intent = new Intent(LoginActivity.this, IndexActivity.class);
+                            startActivity(intent);
+                        }
+                        //登录失败显示账号密码有误
+                        else {
+                            Log.d("Login", "Failed");
+                            AlertDialog.Builder error = new AlertDialog.Builder(LoginActivity.this);
+                            error.setMessage("手机号或者密码输入有误");
+                            error.show();
+                        }
+                        Looper.loop();
+                    }
+
+                }.start();
+
                 break;
             case R.id.signup:
                 intent=new Intent(this, SignupActivity.class);

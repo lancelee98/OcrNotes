@@ -1,20 +1,13 @@
 package com.smujsj16.ocr_notes.Service;
 
 
-import android.provider.ContactsContract;
-import android.util.Log;
-
-
 import com.smujsj16.ocr_notes.Entity.User;
-import com.smujsj16.ocr_notes.utils.CheckUtils;
 import com.smujsj16.ocr_notes.utils.MysqlUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBService {
 
@@ -75,10 +68,10 @@ public class DBService {
      * 检验密码
      * */
 
-    public int getUserId(User user)
+    public String getUserId(User user)
     {
         String sql="SELECT * FROM user WHERE phone_num=? ";
-        int result=-1;
+        String result="-1";
         String phone_num=user.getPhone_number();
         conn= MysqlUtils.getConn();
         try {
@@ -90,7 +83,7 @@ public class DBService {
                     if(rs!=null){
                         while(rs.next()){
                             user.setUser_id(rs.getString(3));
-                            result=1;
+                            result="1";
                         }
                     }
                 }

@@ -25,14 +25,14 @@
         </provider>
 
         <activity android:name=".module.MainActivity" />
-        <activity android:name=".module.TEST">
+        <activity android:name=".module.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.LoginActivity"></activity>
+
         <activity android:name=".module.SignupActivity" />
         <activity android:name=".module.IndexActivity" />
     </application>
