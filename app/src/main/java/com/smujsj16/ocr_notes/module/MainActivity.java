@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -64,14 +65,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        Info info = new Info(SignupActivity.userid, title.getText().toString(), ocrResult.getText().toString(),
-                                IndexActivity.savePath + "/", filename + ".jpg");
-                        DBService.getDbService().createNewNotes(info);//新建笔记
-                    }
-                }.start();
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            Info info = new Info(SignupActivity.userid, title.getText().toString(), ocrResult.getText().toString(),
+                                    IndexActivity.savePath + "/", filename + ".jpg");
+                            DBService.getDbService().createNewNotes(info);//新建笔记
+                        }
+                    }.start();
+                    AlertDialog.Builder success = new AlertDialog.Builder(MainActivity.this);
+                    success.setMessage("上传成功");
+                    success.show();
+
+
             }
         });
         showOcrResult();
