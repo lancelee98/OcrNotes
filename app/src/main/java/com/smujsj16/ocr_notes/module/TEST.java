@@ -12,7 +12,6 @@ import com.smujsj16.ocr_notes.R;
 import com.smujsj16.ocr_notes.Service.DBService;
 import com.smujsj16.ocr_notes.utils.SFTPUtils;
 
-import java.util.Date;
 import java.util.List;
 
 import static com.smujsj16.ocr_notes.utils.PermissionUtils.verifyStoragePermissions;
@@ -71,7 +70,7 @@ public class TEST extends Activity implements View.OnClickListener {
                        // int i=DBService.getDbService().getUserId(user);//获得id
                        // int i=DBService.getDbService().createNewUser(user);//创建用户
                        // int i=DBService.getDbService().checkPassword("18916139519","19980628lc");//检查密码是否正确
-                       // int i=DBService.getDbService().createNewNotes(info);//新建笔记
+                       //int i=DBService.getDbService().createNewNotes(info);//新建笔记
                         List<Info> infoList=DBService.getDbService().selectNotes("null","2");//查询相关笔记
                         for(Info i : infoList)
                         {

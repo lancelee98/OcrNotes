@@ -1,18 +1,14 @@
 package com.smujsj16.ocr_notes.Service;
 
 
-import android.provider.ContactsContract;
 import android.util.Log;
-
 
 import com.smujsj16.ocr_notes.Entity.Info;
 import com.smujsj16.ocr_notes.Entity.User;
-import com.smujsj16.ocr_notes.utils.CheckUtils;
 import com.smujsj16.ocr_notes.utils.MysqlUtils;
 import com.smujsj16.ocr_notes.utils.SFTPUtils;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -153,7 +149,7 @@ public class DBService {
             //MySQL 语句
             String sql="INSERT INTO info (user_id,title,image_link,create_time,ocr_content) VALUES (?,?,?,?,?)";
             try {
-                boolean closed=conn.isClosed();
+            //    boolean closed=conn.isClosed();
                 if(conn!=null&&(!conn.isClosed())){
                     ps= (PreparedStatement) conn.prepareStatement(sql);
                     ps.setLong(1,userid);//第一个参数

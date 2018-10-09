@@ -42,6 +42,8 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     private Button search_button;
     public static File mTmpFile;
     public static Uri imageUri;
+    public static String savePath;
+    public static String filename;
     public static final int PERMISSIONS_REQUEST_CODE = 1;
     public static final int CAMERA_REQUEST_CODE = 2;
     public static final int LOCAL_CROP = 3;// 本地图库
@@ -92,16 +94,16 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
                             // 选择了拍照
                             case 0:
                                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/img"; //图片保存地址
-                                if (new File(path).exists()) {
+                                savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/img"; //图片保存地址
+                                if (new File(savePath).exists()) {
                                     try {
-                                        new File(path).createNewFile();
+                                        new File(savePath).createNewFile();
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
                                 }
-                                String filename = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                                mTmpFile = new File(path, filename + ".jpg");
+                                filename = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                                mTmpFile = new File(savePath, filename + ".jpg");
                                 mTmpFile.getParentFile().mkdirs();
 
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

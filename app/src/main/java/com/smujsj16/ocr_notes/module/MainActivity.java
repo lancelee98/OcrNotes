@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.smujsj16.ocr_notes.Entity.Info;
 import com.smujsj16.ocr_notes.R;
+import com.smujsj16.ocr_notes.Service.DBService;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static com.smujsj16.ocr_notes.module.IndexActivity.filename;
 
 /**
  * @author smujsj16
@@ -29,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public static ImageView cameraphoto;
     public static EditText ocrResult;
     private Button upload;
+    private  EditText title;
 
 
     public static MainPresenter mPresenter;
@@ -42,16 +55,23 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         mContext = this;
         cameraphoto = findViewById(R.id.photo);
         ocrResult = findViewById(R.id.ocr_content);
+        title=findViewById(R.id.title_input);
         ocrResult.setText("OCR识别中...");
         upload = findViewById(R.id.upload);
         mPresenter = new MainPresenter(this);
+
         //上传操作
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Resources r = mContext.getResources();
-                Bitmap bmp = BitmapFactory.decodeResource(r, R.drawable.test);
-                mPresenter.getRecognitionResultByImage(bmp);*/
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Info info = new Info(SignupActivity.userid, title.getText().toString(), ocrResult.getText().toString(),
+                                IndexActivity.savePath + "/", filename + ".jpg");
+                        DBService.getDbService().createNewNotes(info);//新建笔记
+                    }
+                }.start();
             }
         });
         showOcrResult();
@@ -79,9 +99,32 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 cameraphoto.setImageBitmap(rebitmap);
                 mPresenter.getRecognitionResultByImage(rebitmap); //OCR解析
                 cameraphoto.setImageBitmap(rebitmap);    //展示图片
+                saveBitmap(rebitmap);//保存选择的图片
             }
 
         }
+    }
+
+    public void saveBitmap(Bitmap bm) {
+        filename = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/img", filename+".jpg");
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            bm.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+            Log.i("Test", "已经保存");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
 }
