@@ -35,7 +35,6 @@
 
         <activity android:name=".module.SignupActivity" />
         <activity android:name=".module.IndexActivity" />
-        <activity android:name=".module.OcrActivity"></activity>
 
     </application>
 

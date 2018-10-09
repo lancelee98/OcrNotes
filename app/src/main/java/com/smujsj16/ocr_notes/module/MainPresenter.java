@@ -107,7 +107,7 @@ public class MainPresenter implements MainContract.Presenter{
                         for (RecognitionResultBean.WordsResultBean words:wordsResult) {
                             wordList.add(words.getWords());
                         }
-                        String result=null;
+                        String result="";
                         for(String newword:wordList){
                             result=result+newword+"\n";
                         }
