@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class MysqlUtils {
 
     private static String driver = "com.mysql.jdbc.Driver";//MySQL 驱动
-    private static String url ="jdbc:mysql://118.89.37.35:3306/ocr_app?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    private static String url ="jdbc:mysql://118.89.37.35:3306/ocr_app?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false";
     private static String user = "root";//用户名
     private static String password = "19980628@Lc";//密码
 
