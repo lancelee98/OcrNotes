@@ -23,9 +23,9 @@ import java.util.Vector;
 public class SFTPUtils {
 
     private String TAG="SFTPUtils";
-    private String host="118.89.37.35";
+    private String host="服务器ip";
     private String username="root";
-    private String password="19980628lc";
+    private String password="root";
     private int port = 22;
     private ChannelSftp sftp = null;
     private Session sshSession = null;
